@@ -4,18 +4,18 @@ Choose to remove or only move near the Application's label<br/>
 
 This application is in French, translate coming soon
 
-Manual install 
-build with meson (sudo apt install meson)
+<h1>Manual install </h1>
+build with meson (sudo apt install meson)<br/>
 
-Download the last release (zip) et extract files
-Open a Terminal in the extracted folder, install your application with meson:
+Download the last release (zip) et extract files<br/>
+Open a Terminal in the extracted folder, install your application with meson:<br/>
 
-meson build --prefix=/usr
-cd build
-ninja
-sudo ninja install
+meson build --prefix=/usr<br/>
+cd build<br/>
+ninja<br/>
+sudo ninja install<br/>
 
-Uninstall (need the extracted files)
-In the same extracted folder run the commands :
+<h1>Uninstall (need the extracted files)</h1>
+In the same extracted folder run the commands :<br/>
 sudo ninja uninstall
 
