@@ -1,4 +1,4 @@
-project('com.github.Lafydev.Compteur', 'vala', 'c')
+project('com.github.Lafydev.Kindypanel', 'vala', 'c')
 
 dependencies = [
     dependency('glib-2.0'),

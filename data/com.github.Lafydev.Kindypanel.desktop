@@ -1,10 +1,10 @@
 [Desktop Entry]
-Name=Compteur
-GenericName=Compteur
-Comment=Compter sans ses doigts
+Name=Kindypanel
+GenericName=Kindypanel
+Comment=Create a local theme with an elementary icon
 Categories=Utility;
-Exec=com.github.Lafydev.Compteur
+Exec=com.github.Lafydev.Kindypanel
 Icon=application-default-icon
 Terminal=false
 Type=Application
-Keywords=Calc;Example;
+Keywords=Icon;Elementary;Panel;
