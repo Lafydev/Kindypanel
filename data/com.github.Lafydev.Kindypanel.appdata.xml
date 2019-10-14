@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Lafydev -->
+<component type="desktop">
+	<id>com.github.Lafydev.Compteur</id>
+	<metadata_licence>CC0</metadata_licence>
+	<name>Compteur</name>
+	<summary>Exemple de calculateur ultrasimple</summary>
+	<description>
+		<p>Essai de remonter un projet vala construit</p>
+	</description>
+</component>

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Compteur
+GenericName=Compteur
+Comment=Compter sans ses doigts
+Categories=Utility;
+Exec=com.github.Lafydev.Compteur
+Icon=application-default-icon
+Terminal=false
+Type=Application
+Keywords=Calc;Example;
