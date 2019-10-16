@@ -16,8 +16,8 @@
 * see http :// www . gnu . org /licences / .
 */
 using Gtk;
-	//Fonction récusrsive trouvée sur stackoverflow 
-	//modifiée pour ajouter des tests d'existence des fichiers et dossiers	
+	//Fonction de copie de rép récursive trouvée sur stackoverflow 
+	//modifiée pour ajouter les tests d'existence des fichiers et dossiers	
 	public bool copy_recursive (GLib.File src, GLib.File dest, GLib.FileCopyFlags flags = GLib.FileCopyFlags.NONE, GLib.Cancellable? cancellable = null) throws GLib.Error {
 	GLib.FileType src_type = src.query_file_type (GLib.FileQueryInfoFlags.NONE, cancellable);
 	
@@ -46,10 +46,15 @@ using Gtk;
 	
 int main (string[] args){
 	Gtk.init (ref args);
-
+	//Repertoires Faute de mieux
+	var ICONDIR="/usr/share/Kindypanel/icons/"; 
+	string home = Environment.get_home_dir(); // car ~ refusé
+	var Dirperso = File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/");
+	var PathTheme= "/usr/share/themes/elementary/gtk-3.0/";
+			
 	//Notre fenetre de base
 	var window = new Gtk.Window ();
-	window.title = "Choix multiples";
+	window.title = "Kindypanel";
 	window.set_position (Gtk.WindowPosition.CENTER);
 	window.set_default_size (350, 70);
 	window.destroy.connect (Gtk.main_quit);
@@ -58,8 +63,7 @@ int main (string[] args){
 	//Paned vertical
 	var VBox = new Gtk.Box(Gtk.Orientation.VERTICAL,5);
 	VBox.spacing=6;
-	var ico="elementaryicon.png"; //par défaut
-
+	
 	//Radio buttons
 	var  btn1 = new RadioButton.with_label_from_widget(null,"Bleu");
 	VBox.pack_start(btn1, false, false,0);
@@ -75,39 +79,38 @@ int main (string[] args){
 	VBox.pack_start(btnApp, false, false,0);
 	  
 	//affiche l'image choisie
-	var img = new Gtk.Image.from_file("elementaryicon.png");
+	var ico=ICONDIR+ "elementaryicon.png"; //par défaut
+	var img = new Gtk.Image.from_file(ICONDIR+"/elementary-bleu.png");
+
 	VBox.pack_start(img, false, false,0);
 	//signaux 
 	btn1.clicked.connect( ()=> { 
-		ico="elementaryicon.png" ;
+		ico=ICONDIR+"/elementary-bleu.png" ;
 		img.set_from_file(ico);});
 	btn2.clicked.connect( ()=> { 
-		ico="elementary-blanc.png";
+		ico=ICONDIR+"elementary-blanc.png";
 		img.set_from_file( ico); });
 	btn3.clicked.connect( ()=> {
-		ico="elementary-noir.png";
+		ico=ICONDIR+"elementary-noir.png";
 		img.set_from_file( ico);});
 		
       //Ajoute un bouton de validation
-      var btn = new Gtk.Button.with_label ("Cliquer ici!");
+      var btn = new Gtk.Button.with_label ("Cliquer pour créer thème personnalisé!");
       VBox.pack_start( btn,true,false,0);
 	  btn.clicked.connect( ()=> { 
 		try {
 			//créer un repertoire dans home si pas déjà 
-			string home = Environment.get_home_dir(); // ~ refusé
-			var Dirperso = File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/");
-			
 			if (!Dirperso.query_exists ()) {
 				Dirperso.make_directory_with_parents ();}
 				
-			//copier tous le répertoire
-			var PathTheme= "/usr/share/themes/elementary/gtk-3.0/";
+			//copier récursivement les répertoire
 			var DirTheme = File.new_for_path (PathTheme) ;
 			copy_recursive(DirTheme,Dirperso,FileCopyFlags.NONE);
 			
 	
-			//Modifier le fichier apps.css de elementary 
+			//Copier le fichier apps.css de elementary pour personnaliser
 			var fichstyle=File.new_for_path (PathTheme+ "/apps.css");
+			//var perso =  File.new_for_path (Dirperso+"/apps.css");
 			var perso =  File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/apps.css");
 			
 			//Force la copie  de apps.css vers home perso même si déjà 
@@ -157,6 +160,7 @@ int main (string[] args){
         stderr.printf ("Error: %s\n", e.message);
         
 		}
+		btn.label="Veuillez utiliser elementary tweaks ou gnome tweaks pour choisir le nouveau thème kindypanel";
 		Gtk.main_quit();
 		
 	});
