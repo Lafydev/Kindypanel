@@ -119,8 +119,6 @@ int main (string[] args){
 			/*stdout.printf ("Création d'une copie personnalisée de apps.css.\n");*/
 			fichstyle.copy (perso, FileCopyFlags.OVERWRITE);	
 			
-			
-			   
 		    string[] lig= new string[14];
 		    
 		    lig[0]= "/**** ADD AN ICON ELEMENTARY */";
