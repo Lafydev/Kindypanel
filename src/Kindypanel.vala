@@ -46,6 +46,8 @@ using Gtk;
 	
 int main (string[] args){
 	Gtk.init (ref args);
+	
+		
 	//Repertoires Faute de mieux
 	var ICONDIR="/usr/share/Kindypanel/icons/"; 
 	string home = Environment.get_home_dir(); // car ~ refusé
@@ -59,7 +61,7 @@ int main (string[] args){
 	window.set_default_size (350, 70);
 	window.destroy.connect (Gtk.main_quit);
 	window.border_width = 10; //marge intérieure
-
+	
 	//Paned vertical
 	var VBox = new Gtk.Box(Gtk.Orientation.VERTICAL,5);
 	VBox.spacing=6;
@@ -73,13 +75,9 @@ int main (string[] args){
       
 	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,"Noir");
 	VBox.pack_start(btn3, false, false,0);
-	
-	//Case à cocher Garder Application
-	var btnApp = new Gtk.CheckButton.with_label("Garder Application");
-	VBox.pack_start(btnApp, false, false,0);
 	  
 	//affiche l'image choisie
-	var ico=ICONDIR+ "elementaryicon.png"; //par défaut
+	var ico=ICONDIR+ "elementary-bleu.png"; //par défaut
 	var img = new Gtk.Image.from_file(ICONDIR+"/elementary-bleu.png");
 
 	VBox.pack_start(img, false, false,0);
@@ -94,10 +92,14 @@ int main (string[] args){
 		ico=ICONDIR+"elementary-noir.png";
 		img.set_from_file( ico);});
 		
-      //Ajoute un bouton de validation
-      var btn = new Gtk.Button.with_label ("Cliquer pour créer thème personnalisé!");
-      VBox.pack_start( btn,true,false,0);
-	  btn.clicked.connect( ()=> { 
+	//Ajoute une case à cocher pour garder Application
+	var btnApp = new Gtk.CheckButton.with_label("Garder Application");
+	VBox.pack_start(btnApp, false, false,0);
+	
+	//Ajoute un bouton de validation
+	var btn = new Gtk.Button.with_label ("Cliquer pour créer votre thème personnalisé!");
+	VBox.pack_start( btn,true,false,0);
+	btn.clicked.connect( ()=> { 
 		try {
 			//créer un repertoire dans home si pas déjà 
 			if (!Dirperso.query_exists ()) {
@@ -160,14 +162,26 @@ int main (string[] args){
         stderr.printf ("Error: %s\n", e.message);
         
 		}
-		btn.label="Veuillez utiliser elementary tweaks ou gnome tweaks pour choisir le nouveau thème kindypanel";
+		//message final
+		var msg = "Thème créé avec succès!\n";
+		msg+= "Lancez elementary tweaks ou gnome adjustment \n";
+		msg += "pour ativer votre nouveau thème GTK Kindypanel";
+		var messagedialog = new Gtk.MessageDialog (window,
+                            Gtk.DialogFlags.MODAL,
+                            Gtk.MessageType.INFO,
+                            Gtk.ButtonsType.OK,
+                            msg);
+
+		messagedialog.run ();
+		
+		
 		Gtk.main_quit();
 		
 	});
 
-      window.add (VBox);
-      window.show_all ();
+	window.add (VBox);
+	window.show_all ();
 
-      Gtk.main();
-      return 0;
+	Gtk.main();
+	return 0;
 }

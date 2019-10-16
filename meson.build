@@ -9,9 +9,22 @@ dependencies = [
 
 sources = files('src/Kindypanel.vala')
 
-executable(meson.project_name(), sources, dependencies: dependencies, install: true)
+mes_icons = ['elementary-blanc', 'elementary-noir', 'elementary-bleu']
 
-#installation du .desktop vers le menu applications
+foreach m : mes_icons
+    install_data(
+        join_paths('data/icons', m + '.png'),
+        install_dir: join_paths(get_option('datadir'), 'Kindypanel', 'icons')
+    )
+endforeach
+
+#installation de l'exe dans usr/bin
+executable(meson.project_name(), 
+	sources, 
+	dependencies: dependencies, 
+	install: true)
+
+#installation du .desktop vers le menu usr/share/applications
 install_data( 
 	join_paths('data',meson.project_name()+'.desktop'),
 	install_dir: join_paths(get_option('datadir'),'applications')
