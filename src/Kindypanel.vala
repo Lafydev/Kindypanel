@@ -46,7 +46,6 @@ using Gtk;
 	
 int main (string[] args){
 	Gtk.init (ref args);
-	
 		
 	//Repertoires Faute de mieux
 	var ICONDIR="/usr/share/Kindypanel/icons/"; 
@@ -54,7 +53,7 @@ int main (string[] args){
 	var Dirperso = File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/");
 	var PathTheme= "/usr/share/themes/elementary/gtk-3.0/";
 			
-	//Notre fenetre de base
+	//Fenetre de base
 	var window = new Gtk.Window ();
 	window.title = "Kindypanel";
 	window.set_position (Gtk.WindowPosition.CENTER);
@@ -62,25 +61,27 @@ int main (string[] args){
 	window.destroy.connect (Gtk.main_quit);
 	window.border_width = 10; //marge intérieure
 	
-	//Paned vertical
-	var VBox = new Gtk.Box(Gtk.Orientation.VERTICAL,5);
-	VBox.spacing=6;
+	//Grid 
+	var mygrid = new Gtk.Grid();
+	mygrid.set_row_spacing (10); //espace entre 2 lignes
+    mygrid.set_column_spacing (10);
 	
 	//Radio buttons
 	var  btn1 = new RadioButton.with_label_from_widget(null,"Bleu");
-	VBox.pack_start(btn1, false, false,0);
-	
+	mygrid.attach(btn1, 0, 0);
+
 	var btn2 = new Gtk.RadioButton.with_label_from_widget(btn1,"Blanc");
-	VBox.pack_start(btn2, false, false,0);
+	mygrid.attach(btn2, 0, 1);
       
 	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,"Noir");
-	VBox.pack_start(btn3, false, false,0);
+	mygrid.attach(btn3, 0, 2);
 	  
 	//affiche l'image choisie
 	var ico=ICONDIR+ "elementary-bleu.png"; //par défaut
 	var img = new Gtk.Image.from_file(ICONDIR+"/elementary-bleu.png");
 
-	VBox.pack_start(img, false, false,0);
+	mygrid.attach(img, 1, 0,1,3);
+		
 	//signaux 
 	btn1.clicked.connect( ()=> { 
 		ico=ICONDIR+"/elementary-bleu.png" ;
@@ -93,12 +94,16 @@ int main (string[] args){
 		img.set_from_file( ico);});
 		
 	//Ajoute une case à cocher pour garder Application
-	var btnApp = new Gtk.CheckButton.with_label("Garder Application");
-	VBox.pack_start(btnApp, false, false,0);
+	var btnApp = new Gtk.CheckButton.with_label("Garder le mot Application");
+	mygrid.attach(btnApp, 0, 3,2);
+	
+	//Ajoute une case à cocher pour panel Transparent 
+	var btnTransparent = new Gtk.CheckButton.with_label("Panel Transparent");
+	mygrid.attach(btnTransparent, 0,4,2);
 	
 	//Ajoute un bouton de validation
 	var btn = new Gtk.Button.with_label ("Cliquer pour créer votre thème personnalisé!");
-	VBox.pack_start( btn,true,false,0);
+	mygrid.attach( btn,0,5,2);
 	btn.clicked.connect( ()=> { 
 		try {
 			//créer un repertoire dans home si pas déjà 
@@ -121,34 +126,48 @@ int main (string[] args){
 			
 		    string[] lig= new string[14];
 		    
-		    lig[0]= "/**** ADD AN ICON ELEMENTARY */";
+		    lig[0]= "/**** ADD AN ELEMENTARY ICON  */";
 			lig[1]= ".panel{";
-			lig[2]="background-image: url(\"elementaryicon.png\"); ";
-			lig[3]="background-repeat: no-repeat;";
-			lig[4]="}";
-			lig[5]="/* NO magnifier*/";
-			lig[6]=".panel menubar:first-child .composited-indicator > revealer image{";
-			lig[7]="margin-left:-30px;";
-			lig[8]="}";
+			lig[2]="background: url(\"elementaryicon.png\") no-repeat 5px; ";
+			lig[3]="}";
 			
-			if (btnApp.active) {
-				lig[9]="/* MOVE APPLICATION*/";
-				lig[10]=".panel menubar:first-child .composited-indicator > revealer label{";
-				lig[11]="margin-left:20px;";
-				lig[12]="}";
-			}
-			else {
-				lig[9]="/* Minimize APPLICATION*/";
-				lig[10]=".panel menubar:first-child {";
-				lig[11]="font-size:0px;";
-				lig[12]="}";
-			}
+			lig[4]="/* NO magnifier*/";
+			lig[5]=".panel menubar:first-child .composited-indicator > revealer image{";
+			lig[6]="margin-left:-30px;";
+			lig[7]="}";
 			
+			//Dans tous les cas sinon flèche des applis mal positionnée
+			lig[8]="/* MOVE APPLICATION*/";
+			lig[9]=".panel menubar:first-child .composited-indicator > revealer label{";
+			lig[10]="margin-left:20px;";
+			lig[11]="}";
+				
 		    //Ouvrir le fichier et ajouter modifs 
 			FileOutputStream os = perso.append_to (FileCreateFlags.NONE);
-			for (int i=0;i<=12;i++) {
+			for (int i=0;i<=11;i++) {
 				os.write ((lig[i]+"\n").data);
 			}	
+			
+			if (! btnApp.active)  {
+				lig[1]="/* Minimize APPLICATION*/";
+				lig[2]=".panel menubar:first-child {";
+				lig[3]="font-size:0px;";
+				lig[4]="}";
+			
+				for (int i=0;i<=4;i++) {
+					os.write ((lig[i]+"\n").data);
+				}	
+			}
+			
+			if (btnTransparent.active ) {
+			lig[1]="/* Couleur Panel Transparent */";;
+			lig[2]=".panel.maximized {";
+			lig[3]="background-color: transparent ;";
+			lig[4]="}";	
+				for (int i=0;i<=4;i++) {
+					os.write ((lig[i]+"\n").data);
+				}	
+			}
 			
 		    //copier l'icone choisi 
 		    var modeleico=File.new_for_path (ico);
@@ -177,7 +196,7 @@ int main (string[] args){
 		
 	});
 
-	window.add (VBox);
+	window.add (mygrid);
 	window.show_all ();
 
 	Gtk.main();
