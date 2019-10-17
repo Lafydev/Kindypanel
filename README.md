@@ -10,6 +10,8 @@ Create an personnal theme based on elementary's original wingpanel : <br>
 This application is in French, translations are coming soon
 Thanks to Angedestenebres and Wolfy for their crash-tests 
 
+<p align="center"><img src="screenshot.png"/> </p>
+
 <h1>Manual install </h1>
 
 <h2>Dependencies</h2>
