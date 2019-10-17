@@ -76,6 +76,7 @@ int main (string[] args){
 	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,"Noir");
 	mygrid.attach(btn3, 0, 2);
 	  
+	  
 	//affiche l'image choisie
 	var ico=ICONDIR+ "elementary-bleu.png"; //par défaut
 	var img = new Gtk.Image.from_file(ICONDIR+"/elementary-bleu.png");
@@ -93,17 +94,28 @@ int main (string[] args){
 		ico=ICONDIR+"elementary-noir.png";
 		img.set_from_file( ico);});
 		
+	var separator = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);
+	mygrid.attach(separator, 0,3,2);
+		
 	//Ajoute une case à cocher pour garder Application
 	var btnApp = new Gtk.CheckButton.with_label("Garder le mot Application");
-	mygrid.attach(btnApp, 0, 3,2);
+	mygrid.attach(btnApp, 0, 4,2);
 	
 	//Ajoute une case à cocher pour panel Transparent 
 	var btnTransparent = new Gtk.CheckButton.with_label("Panel Transparent");
-	mygrid.attach(btnTransparent, 0,4,2);
-	
+	mygrid.attach(btnTransparent, 0,5,2);
+
 	//Ajoute un bouton de validation
-	var btn = new Gtk.Button.with_label ("Cliquer pour créer votre thème personnalisé!");
-	mygrid.attach( btn,0,5,2);
+	var btn = new Gtk.Button.with_label ("Créer votre thème!");
+	mygrid.attach( btn,0,6,2);
+	
+	//Deux boutons prévus pour appliquer le theme
+	var btnappliquer = new Gtk.Button.with_label ("Appliquer thème");
+	var btnretour = new Gtk.Button.with_label ("Retour elementary");
+	
+	bool erreur=false;
+	bool boutonvisible=false;
+	
 	btn.clicked.connect( ()=> { 
 		try {
 			//créer un repertoire dans home si pas déjà 
@@ -176,25 +188,63 @@ int main (string[] args){
 				
 	  
 		  } catch (Error e) {
-        stderr.printf ("Error: %s\n", e.message);
-        
+			stderr.printf ("Error: %s\n", e.message);
+			erreur=true;
 		}
-		//message final
-		var msg = "Thème créé avec succès!\n";
-		msg+= "Lancez elementary tweaks ou gnome adjustment \n";
-		msg += "pour ativer votre nouveau thème GTK Kindypanel";
-		var messagedialog = new Gtk.MessageDialog (window,
-                            Gtk.DialogFlags.MODAL,
-                            Gtk.MessageType.INFO,
-                            Gtk.ButtonsType.OK,
-                            msg);
+		
+		
+		if (erreur==false) {
+			//message final
+			var msg = "Thème modifié avec succès!\n";
+			
+			var messagedialog = new Gtk.MessageDialog (window,
+								Gtk.DialogFlags.MODAL,
+								Gtk.MessageType.INFO,
+								Gtk.ButtonsType.OK,
+								msg);
 
-		messagedialog.run ();
+			messagedialog.run ();
+			messagedialog.destroy();
+			
+			if (boutonvisible==false) {
+			//Montre les boutons appliquer et retour
+			mygrid.attach( btnappliquer,0,7);
+			mygrid.attach( btnretour,1,7);
+			mygrid.show_all();
+			string[] cde= new string[3];
+			
+			btnappliquer.clicked.connect( ()=> { 
+				cde[1]= "gsettings set org.gnome.desktop.interface gtk-theme \"kindypanel\"";
+				cde[2]= "gsettings set org.gnome.desktop.wm.preferences theme \"kindypanel\"";
+				cde[3]= "killall wingpanel";
+			
+				try {
+					for (int i=1;i<=3;i++) {
+					Process.spawn_command_line_sync(cde[i]);
+					}
+				} catch (SpawnError e) {
+					print ("Error: %s\n", e.message);
+					}
+				});
+				
+			btnretour.clicked.connect( ()=> { 
+				cde[1]= "gsettings set org.gnome.desktop.interface gtk-theme \"elementary\"";
+				cde[2]= "gsettings set org.gnome.desktop.wm.preferences theme \"elementary\"";
+				
+				try {for (int i=1;i<=2;i++) {
+					Process.spawn_command_line_sync(cde[i]);
+					}
+				} catch (SpawnError e) {
+					print ("Error: %s\n", e.message);
+					}
+				});
+			boutonvisible=true;
+			} //fin creation 2 boutons supplémentaires
+			
+		} //fin erreur générer theme = False
 		
-		
-		Gtk.main_quit();
-		
-	});
+		});//fin click btn
+	
 
 	window.add (mygrid);
 	window.show_all ();
