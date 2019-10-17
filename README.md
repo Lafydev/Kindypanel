@@ -1,32 +1,32 @@
 # Kindypanel
 <h1>Description:</h1>
+Create a personnal theme based on elementary's original wingpanel : <br>
 <ul>
-Create an personnal theme based on elementary's original wingpanel : <br>
-<li>Add an elementary icon at top left of the screen</li>
+<li>Add an elementary icon at the top left of the screen</li>
 <li>Choose to remove or keep the Application's label</li> 
 <li>Choose if you want a transparent panel</li>
 </ul>
 
-This application is in French, translations are coming soon
-Thanks to Angedestenebres and Wolfy for their crash-tests 
+This application is in French, translations are coming soon...<br/>
+Thanks to Angedestenebres and Wolfy for their crash-tests <br/>
 
 <p align="center"><img src="screenshot.png"/> </p>
 
 <h1>Manual install </h1>
 
-<h2>Dependencies</h2>
-gcc valac gtk3 meson <br/><br/>
+<h2>Dependencies:</h2>
+gcc - valac - gtk3 - meson <br/><br/>
 
 Build with meson:<br/>
 
 Download the last release (zip) et extract files<br/>
 Open a Terminal in the extracted folder, install your application with meson:<br/>
 
-<code>meson build --prefix=/usr<br/>
-cd build<br/>
-ninja<br/>
-sudo ninja install<br/>
-</code>
+<pre>meson build --prefix=/usr
+cd build
+ninja
+sudo ninja install
+</pre>
 
 <h1>Uninstall (need the extracted files)</h1>
 In the previous folder ( /build) run the command :<br/>
