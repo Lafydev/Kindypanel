@@ -15,6 +15,8 @@
 * License along with this program; if not,
 * see http :// www . gnu . org /licences / .
 */
+
+
 using Gtk;
 	//Fonction de copie de rép récursive trouvée sur stackoverflow 
 	//modifiée pour ajouter les tests d'existence des fichiers et dossiers	
@@ -43,11 +45,11 @@ using Gtk;
 
   return true;
 }
-	
+ 
 int main (string[] args){
 	Gtk.init (ref args);
 		
-	//Repertoires Faute de mieux
+	//Repertoires (A revoir)
 	var ICONDIR="/usr/share/Kindypanel/icons/"; 
 	string home = Environment.get_home_dir(); // car ~ refusé
 	var Dirperso = File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/");
@@ -67,13 +69,13 @@ int main (string[] args){
     mygrid.set_column_spacing (10);
 	
 	//Radio buttons
-	var  btn1 = new RadioButton.with_label_from_widget(null,"Bleu");
+	var  btn1 = new RadioButton.with_label_from_widget(null,_("Bleu"));
 	mygrid.attach(btn1, 0, 0);
 
-	var btn2 = new Gtk.RadioButton.with_label_from_widget(btn1,"Blanc");
+	var btn2 = new Gtk.RadioButton.with_label_from_widget(btn1,_("Blanc"));
 	mygrid.attach(btn2, 0, 1);
       
-	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,"Noir");
+	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,_("Noir"));
 	mygrid.attach(btn3, 0, 2);
 	  
 	  
@@ -98,20 +100,20 @@ int main (string[] args){
 	mygrid.attach(separator, 0,3,2);
 		
 	//Ajoute une case à cocher pour garder Application
-	var btnApp = new Gtk.CheckButton.with_label("Garder le mot Application");
+	var btnApp = new Gtk.CheckButton.with_label(_("Garder le mot Application"));
 	mygrid.attach(btnApp, 0, 4,2);
 	
 	//Ajoute une case à cocher pour panel Transparent 
-	var btnTransparent = new Gtk.CheckButton.with_label("Panel Transparent");
+	var btnTransparent = new Gtk.CheckButton.with_label(_("Panel Transparent"));
 	mygrid.attach(btnTransparent, 0,5,2);
 
 	//Ajoute un bouton de validation
-	var btn = new Gtk.Button.with_label ("Créer votre thème!");
+	var btn = new Gtk.Button.with_label (_("Créer votre thème!"));
 	mygrid.attach( btn,0,6,2);
 	
 	//Deux boutons prévus pour appliquer le theme
-	var btnappliquer = new Gtk.Button.with_label ("Appliquer thème");
-	var btnretour = new Gtk.Button.with_label ("Retour elementary");
+	var btnappliquer = new Gtk.Button.with_label (_("Appliquer thème"));
+	var btnretour = new Gtk.Button.with_label (_("Retour elementary"));
 	
 	bool erreur=false;
 	bool boutonvisible=false;
@@ -140,10 +142,10 @@ int main (string[] args){
 		    
 		    lig[0]= "/**** ADD AN ELEMENTARY ICON  */";
 			lig[1]= ".panel{";
-			lig[2]="background: url(\"elementaryicon.png\") no-repeat 5px; ";
+			lig[2]="background: url(\"elementaryicon.png\") no-repeat 4px; ";
 			lig[3]="}";
 			
-			lig[4]="/* NO magnifier*/";
+			lig[4]="/* NO magnifier - pas de loupe*/";
 			lig[5]=".panel menubar:first-child .composited-indicator > revealer image{";
 			lig[6]="margin-left:-30px;";
 			lig[7]="}";
@@ -172,7 +174,7 @@ int main (string[] args){
 			}
 			
 			if (btnTransparent.active ) {
-			lig[1]="/* Couleur Panel Transparent */";;
+			lig[1]="/* Panel Transparent */";;
 			lig[2]=".panel.maximized {";
 			lig[3]="background-color: transparent ;";
 			lig[4]="}";	
@@ -195,7 +197,7 @@ int main (string[] args){
 		
 		if (erreur==false) {
 			//message final
-			var msg = "Thème modifié avec succès!\n";
+			var msg = _("Thème modifié avec succès!\n");
 			
 			var messagedialog = new Gtk.MessageDialog (window,
 								Gtk.DialogFlags.MODAL,
@@ -215,6 +217,7 @@ int main (string[] args){
 			
 			btnappliquer.clicked.connect( ()=> { 
 				cde[1]= "gsettings set org.gnome.desktop.interface gtk-theme \"kindypanel\"";
+				//uniquement pour WM
 				cde[2]= "gsettings set org.gnome.desktop.wm.preferences theme \"kindypanel\"";
 				cde[3]= "killall wingpanel";
 			

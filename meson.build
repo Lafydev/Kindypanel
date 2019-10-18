@@ -1,5 +1,11 @@
 project('com.github.Lafydev.Kindypanel', 'vala', 'c')
 
+#include the translations module
+i18n=import('i18n')
+
+#set our translation domain
+add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()),language:'c')
+
 dependencies = [
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
@@ -24,13 +30,22 @@ executable(meson.project_name(),
 	dependencies: dependencies, 
 	install: true)
 
-#installation du .desktop vers le menu usr/share/applications
-install_data( 
-	join_paths('data',meson.project_name()+'.desktop'),
+#translate and install our.desktop (vers le menu usr/share/applications)
+i18n.merge_file(
+	input:join_paths('data',meson.project_name() + '.desktop.in'),
+	output: meson.project_name() +'.desktop',
+	po_dir: join_paths(meson.source_root(),'po'),
+	type: 'desktop',
+	install: true,
 	install_dir: join_paths(get_option('datadir'),'applications')
-)
-#installation du xml pour appcenter
-install_data(
-	join_paths('data',meson.project_name()+'.appdata.xml'),
+	)
+	
+#translate and install our .xml (pour appcenter)
+i18n.merge_file(
+	input: join_paths('data',meson.project_name()+ '.appdata.xml.in'),
+	output: meson.project_name()+ 'appdata.xml',
+	po_dir: join_paths(meson.source_root(),'po'),
+	install:true,
 	install_dir: join_paths(get_option('datadir'),'metainfo')
 )
+subdir('po')

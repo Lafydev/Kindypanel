@@ -7,8 +7,7 @@ Create a personnal theme based on elementary's original wingpanel : <br>
 <li>Choose if you want a transparent panel</li>
 </ul>
 
-This application is in French, translations are coming soon...<br/>
-Thanks to Angedestenebres and Wolfy for their crash-tests <br/>
+Thanks to Angedestenebres and Wolfwarrior for their crash-tests <br/>
 
 <p align="center"><img src="screenshot.png"/> </p>
 

@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.Lafydev.Kindypanel package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: com.github.Lafydev.Kindypanel\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-18 10:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/Kindypanel.vala:72
+msgid "Bleu"
+msgstr ""
+
+#: src/Kindypanel.vala:75
+msgid "Blanc"
+msgstr ""
+
+#: src/Kindypanel.vala:78
+msgid "Noir"
+msgstr ""
+
+#: src/Kindypanel.vala:103
+msgid "Garder le mot Application"
+msgstr ""
+
+#: src/Kindypanel.vala:107
+msgid "Panel Transparent"
+msgstr ""
+
+#: src/Kindypanel.vala:111
+msgid "Créer votre thème!"
+msgstr ""
+
+#: src/Kindypanel.vala:115
+msgid "Appliquer thème"
+msgstr ""
+
+#: src/Kindypanel.vala:116
+msgid "Retour elementary"
+msgstr ""
+
+#: src/Kindypanel.vala:200
+msgid "Thème modifié avec succès!\n"
+msgstr ""
+
+#: data/com.github.Lafydev.Kindypanel.desktop.in:3
+#: data/com.github.Lafydev.Kindypanel.desktop.in:4
+#: data/com.github.Lafydev.Kindypanel.appdata.xml.in:6
+msgid "Kindypanel"
+msgstr ""
+
+#: data/com.github.Lafydev.Kindypanel.desktop.in:5
+msgid "Create a local theme with an elementary icon"
+msgstr ""
+
+#: data/com.github.Lafydev.Kindypanel.desktop.in:8
+msgid "application-default-icon"
+msgstr ""
+
+#: data/com.github.Lafydev.Kindypanel.desktop.in:11
+msgid "Icon;Elementary;Panel;"
+msgstr ""
+
+#: data/com.github.Lafydev.Kindypanel.appdata.xml.in:7
+msgid "Create a local theme with an icon"
+msgstr ""
