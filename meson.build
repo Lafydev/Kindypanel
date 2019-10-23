@@ -1,4 +1,4 @@
-project('com.github.Lafydev.Kindypanel', 'vala', 'c')
+project('com.github.lafydev.kindypanel', 'vala', 'c')
 
 #include the translations module
 i18n=import('i18n')
@@ -20,9 +20,14 @@ mes_icons = ['elementary-blanc', 'elementary-noir', 'elementary-bleu']
 foreach m : mes_icons
     install_data(
         join_paths('data/icons', m + '.png'),
-        install_dir: join_paths(get_option('datadir'), 'Kindypanel', 'icons')
+        install_dir: join_paths(get_option('datadir'), 'kindypanel', 'icons')
     )
 endforeach
+
+install_data(
+        join_paths('data/icons', meson.project_name() +'.png'),
+        install_dir: join_paths(get_option('datadir'), 'icons', 'hicolor','48x48','apps')
+    )
 
 #installation de l'exe dans usr/bin
 executable(meson.project_name(), 
@@ -43,7 +48,7 @@ i18n.merge_file(
 #translate and install our .xml (pour appcenter)
 i18n.merge_file(
 	input: join_paths('data',meson.project_name()+ '.appdata.xml.in'),
-	output: meson.project_name()+ 'appdata.xml',
+	output: meson.project_name()+ '.appdata.xml',
 	po_dir: join_paths(meson.source_root(),'po'),
 	install:true,
 	install_dir: join_paths(get_option('datadir'),'metainfo')

@@ -18,41 +18,45 @@
 
 
 using Gtk;
-	//Fonction de copie de rép récursive trouvée sur stackoverflow 
-	//modifiée pour ajouter les tests d'existence des fichiers et dossiers	
-	public bool copy_recursive (GLib.File src, GLib.File dest, GLib.FileCopyFlags flags = GLib.FileCopyFlags.NONE, GLib.Cancellable? cancellable = null) throws GLib.Error {
-	GLib.FileType src_type = src.query_file_type (GLib.FileQueryInfoFlags.NONE, cancellable);
-	
-	if ( src_type == GLib.FileType.DIRECTORY ) {
-		if (!dest.query_exists ()) {
-		dest.make_directory (cancellable); }
-		
-		src.copy_attributes (dest, flags, cancellable);
+//Pour compiler après _() 
+//insérer -X -DGETTEXT_PACKAGE="..."  directives de compil
+//const string GETTEXT_PACKAGE = "...";
 
-		string src_path = src.get_path ();
-		string dest_path = dest.get_path ();
-		GLib.FileEnumerator enumerator = src.enumerate_children (GLib.FileAttribute.STANDARD_NAME, GLib.FileQueryInfoFlags.NONE, cancellable);
-		for ( GLib.FileInfo? info = enumerator.next_file (cancellable) ; info != null ; info = enumerator.next_file (cancellable) ) {
-		copy_recursive (
-			GLib.File.new_for_path (GLib.Path.build_filename (src_path, info.get_name ())),
-			GLib.File.new_for_path (GLib.Path.build_filename (dest_path, info.get_name ())),
-			flags, cancellable);
-		}
+//Fonction de copie de rép récursive trouvée sur stackoverflow 
+//modifiée pour ajouter les tests d'existence des fichiers et dossiers	
+public bool copy_recursive (GLib.File src, GLib.File dest, GLib.FileCopyFlags flags = GLib.FileCopyFlags.NONE, GLib.Cancellable? cancellable = null) throws GLib.Error {
+GLib.FileType src_type = src.query_file_type (GLib.FileQueryInfoFlags.NONE, cancellable);
+
+if ( src_type == GLib.FileType.DIRECTORY ) {
+	if (!dest.query_exists ()) {
+	dest.make_directory (cancellable); }
+	
+	src.copy_attributes (dest, flags, cancellable);
+
+	string src_path = src.get_path ();
+	string dest_path = dest.get_path ();
+	GLib.FileEnumerator enumerator = src.enumerate_children (GLib.FileAttribute.STANDARD_NAME, GLib.FileQueryInfoFlags.NONE, cancellable);
+	for ( GLib.FileInfo? info = enumerator.next_file (cancellable) ; info != null ; info = enumerator.next_file (cancellable) ) {
+	copy_recursive (
+		GLib.File.new_for_path (GLib.Path.build_filename (src_path, info.get_name ())),
+		GLib.File.new_for_path (GLib.Path.build_filename (dest_path, info.get_name ())),
+		flags, cancellable);
+		} //fin for
 	} else if ( src_type == GLib.FileType.REGULAR ) {
     if (!dest.query_exists ()) {
 		src.copy (dest, flags, cancellable);}
-  }
+    }
 
-  return true;
+	return true;
 }
  
 int main (string[] args){
 	Gtk.init (ref args);
 		
-	//Repertoires (A revoir)
-	var ICONDIR="/usr/share/Kindypanel/icons/"; 
+	//Repertoires (A améliorer)
+	var ICONDIR="/usr/share/kindypanel/icons/"; 
 	string home = Environment.get_home_dir(); // car ~ refusé
-	var Dirperso = File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/");
+	var PathPerso = File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/");
 	var PathTheme= "/usr/share/themes/elementary/gtk-3.0/";
 			
 	//Fenetre de base
@@ -121,67 +125,63 @@ int main (string[] args){
 	btn.clicked.connect( ()=> { 
 		try {
 			//créer un repertoire dans home si pas déjà 
-			if (!Dirperso.query_exists ()) {
-				Dirperso.make_directory_with_parents ();}
+			if (!PathPerso.query_exists ()) {
+				PathPerso.make_directory_with_parents ();}
 				
 			//copier récursivement les répertoire
 			var DirTheme = File.new_for_path (PathTheme) ;
-			copy_recursive(DirTheme,Dirperso,FileCopyFlags.NONE);
-			
+			copy_recursive(DirTheme,PathPerso,FileCopyFlags.NONE);
+			//stdout.printf("Copie recursive des répertoires terminée");
 	
 			//Copier le fichier apps.css de elementary pour personnaliser
 			var fichstyle=File.new_for_path (PathTheme+ "/apps.css");
-			//var perso =  File.new_for_path (Dirperso+"/apps.css");
+			
+			//var perso =  File.new_for_path (PathPerso+"/apps.css");
 			var perso =  File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/apps.css");
 			
 			//Force la copie  de apps.css vers home perso même si déjà 
-			/*stdout.printf ("Création d'une copie personnalisée de apps.css.\n");*/
 			fichstyle.copy (perso, FileCopyFlags.OVERWRITE);	
+			//stdout.printf("Copie apps terminée\n");
 			
-		    string[] lig= new string[14];
+		    string[] lig= new string[1];
 		    
-		    lig[0]= "/**** ADD AN ELEMENTARY ICON  */";
-			lig[1]= ".panel{";
-			lig[2]="background: url(\"elementaryicon.png\") no-repeat 4px; ";
-			lig[3]="}";
+		    lig[0]= "/**** KINDYPANEL - ADD AN ELEMENTARY ICON  */";
+			lig+= ".panel{";
+			lig+="background: url(\"elementaryicon.png\") no-repeat 4px; ";
+			lig+="}";
 			
-			lig[4]="/* NO magnifier - pas de loupe*/";
-			lig[5]=".panel menubar:first-child .composited-indicator > revealer image{";
-			lig[6]="margin-left:-30px;";
-			lig[7]="}";
+			lig+="/* NO magnifier - pas de loupe*/";
+			lig+=".panel menubar:first-child .composited-indicator > revealer image{";
+			lig+="margin-left:-30px;";
+			lig+="}";
 			
 			//Dans tous les cas sinon flèche des applis mal positionnée
-			lig[8]="/* MOVE APPLICATION*/";
-			lig[9]=".panel menubar:first-child .composited-indicator > revealer label{";
-			lig[10]="margin-left:20px;";
-			lig[11]="}";
-				
-		    //Ouvrir le fichier et ajouter modifs 
-			FileOutputStream os = perso.append_to (FileCreateFlags.NONE);
-			for (int i=0;i<=11;i++) {
-				os.write ((lig[i]+"\n").data);
-			}	
+			lig+="/* MOVE APPLICATION*/";
+			lig+=".panel menubar:first-child .composited-indicator > revealer label{";
+			lig+="margin-left:20px;";
+			lig+="}";
 			
 			if (! btnApp.active)  {
-				lig[1]="/* Minimize APPLICATION*/";
-				lig[2]=".panel menubar:first-child {";
-				lig[3]="font-size:0px;";
-				lig[4]="}";
+				lig+="/* Minimize APPLICATION*/";
+				lig+=".panel menubar:first-child {";
+				lig+="font-size:0px;";
+				lig+="}";
 			
-				for (int i=0;i<=4;i++) {
-					os.write ((lig[i]+"\n").data);
-				}	
-			}
+			}	
 			
 			if (btnTransparent.active ) {
-			lig[1]="/* Panel Transparent */";;
-			lig[2]=".panel.maximized {";
-			lig[3]="background-color: transparent ;";
-			lig[4]="}";	
-				for (int i=0;i<=4;i++) {
-					os.write ((lig[i]+"\n").data);
-				}	
+				lig+="/* Panel Transparent */";;
+				lig+=".panel.maximized {";
+				lig+="background-color: transparent ;";
+				lig+="}";	
 			}
+			
+		    //Ouvrir le fichier et ajouter modifs 
+			FileOutputStream os = perso.append_to (FileCreateFlags.NONE);
+			stdout.printf("nb lignes=%d",lig.length);
+			for (int i=0;i<=lig.length-1;i++) {
+				os.write ((lig[i]+"\n").data);
+			}	
 			
 		    //copier l'icone choisi 
 		    var modeleico=File.new_for_path (ico);
