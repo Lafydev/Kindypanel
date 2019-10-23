@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.lafydev.kindypanel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-23 12:37+0200\n"
+"POT-Creation-Date: 2019-10-23 16:35+0200\n"
 "PO-Revision-Date: 2019-10-23 12:37+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -29,27 +29,43 @@ msgstr "White"
 msgid "Noir"
 msgstr "Black"
 
-#: src/Kindypanel.vala:107
-msgid "Garder le mot Application"
-msgstr "Keep Application "
+#: src/Kindypanel.vala:85
+msgid "Autre PNG (24*24px) ..."
+msgstr "Other PNG (24*24px) ..."
 
-#: src/Kindypanel.vala:111
+#: src/Kindypanel.vala:105
+msgid "Ouvrir..."
+msgstr "Open"
+
+#: src/Kindypanel.vala:106
+msgid "_Annuler"
+msgstr "_Cancel"
+
+#: src/Kindypanel.vala:107
+msgid "_Ouvrir"
+msgstr "_Open"
+
+#: src/Kindypanel.vala:133
+msgid "Garder le mot Application"
+msgstr "Keep the word Application "
+
+#: src/Kindypanel.vala:137
 msgid "Panel Transparent"
 msgstr "Panel Transparent"
 
-#: src/Kindypanel.vala:115
+#: src/Kindypanel.vala:141
 msgid "Créer votre thème!"
 msgstr "Create your theme!"
 
-#: src/Kindypanel.vala:119
+#: src/Kindypanel.vala:145
 msgid "Appliquer thème"
 msgstr "Apply"
 
-#: src/Kindypanel.vala:120
+#: src/Kindypanel.vala:146
 msgid "Retour elementary"
-msgstr "Return to elementary's theme"
+msgstr "Return to elementary"
 
-#: src/Kindypanel.vala:200
+#: src/Kindypanel.vala:227
 msgid "Thème modifié avec succès!\n"
 msgstr "Succeed!\n"
 

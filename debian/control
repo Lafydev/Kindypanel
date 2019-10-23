@@ -1,4 +1,4 @@
-Source: com.github.Lafydev.Kindypanel
+Source: com.github.lafydev.kindypanel
 Section: x11
 Priority: extra
 Maintainer: Lafydev <Lafydev/Kindypanel>
@@ -9,8 +9,8 @@ Build-Depends: gettext,
                valac (>= 0.40.0)
 Standards-Version: 3.9.3
 
-Package: com.github.Lafydev.Kindypanel
+Package: com.github.lafydev.kindypanel
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Description: Kindy panel
+Description: Kindypanel
  This is a tweaks for elementary's panel.

@@ -82,7 +82,9 @@ int main (string[] args){
 	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,_("Noir"));
 	mygrid.attach(btn3, 0, 2);
 	  
-	  
+	var btnopen = new Gtk.Button.with_label(_("Autre PNG (24*24px) ..."));
+	mygrid.attach(btnopen, 0, 3,2,1);
+	 
 	//affiche l'image choisie
 	var ico=ICONDIR+ "elementary-bleu.png"; //par défaut
 	var img = new Gtk.Image.from_file(ICONDIR+"/elementary-bleu.png");
@@ -99,21 +101,45 @@ int main (string[] args){
 	btn3.clicked.connect( ()=> {
 		ico=ICONDIR+"elementary-noir.png";
 		img.set_from_file( ico);});
+	btnopen.clicked.connect( ()=> {
+		var dialogue=new Gtk.FileChooserDialog( _("Ouvrir..."),window, Gtk.FileChooserAction.OPEN,
+		_("_Annuler"),Gtk.ResponseType.CANCEL,
+		_("_Ouvrir"),Gtk.ResponseType.ACCEPT);
+		Gtk.FileFilter filter =new Gtk.FileFilter();
+		filter.set_name("Icone (*.png)");
+		filter.add_pattern( "*.[Pp][Nn][Gg]");
+		dialogue.add_filter(filter);
+
+		if (dialogue.run()==Gtk.ResponseType.ACCEPT) 
+			{
+			ico=dialogue.get_filename();
+			File newicon = File.new_for_path(ico);
+			try {
+				string file_content_type = newicon.query_info ("*", FileQueryInfoFlags.NONE).get_content_type();
+				if (file_content_type =="image/png") { img.set_from_file( ico); }
+			} catch (Error e) {
+				stdout.printf("Error %s\n",e.message);
+			}
+				
+			}
+		dialogue.destroy();
 		
+
+	});		
 	var separator = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);
-	mygrid.attach(separator, 0,3,2);
+	mygrid.attach(separator, 0,4,2);
 		
 	//Ajoute une case à cocher pour garder Application
 	var btnApp = new Gtk.CheckButton.with_label(_("Garder le mot Application"));
-	mygrid.attach(btnApp, 0, 4,2);
+	mygrid.attach(btnApp, 0, 5,2);
 	
 	//Ajoute une case à cocher pour panel Transparent 
 	var btnTransparent = new Gtk.CheckButton.with_label(_("Panel Transparent"));
-	mygrid.attach(btnTransparent, 0,5,2);
+	mygrid.attach(btnTransparent, 0,6,2);
 
 	//Ajoute un bouton de validation
 	var btn = new Gtk.Button.with_label (_("Créer votre thème!"));
-	mygrid.attach( btn,0,6,2);
+	mygrid.attach( btn,0,7,2);
 	
 	//Deux boutons prévus pour appliquer le theme
 	var btnappliquer = new Gtk.Button.with_label (_("Appliquer thème"));
@@ -130,6 +156,7 @@ int main (string[] args){
 				
 			//copier récursivement les répertoire
 			var DirTheme = File.new_for_path (PathTheme) ;
+			
 			copy_recursive(DirTheme,PathPerso,FileCopyFlags.NONE);
 			//stdout.printf("Copie recursive des répertoires terminée");
 	
@@ -178,7 +205,7 @@ int main (string[] args){
 			
 		    //Ouvrir le fichier et ajouter modifs 
 			FileOutputStream os = perso.append_to (FileCreateFlags.NONE);
-			stdout.printf("nb lignes=%d",lig.length);
+			//stdout.printf("nb lignes=%d",lig.length);
 			for (int i=0;i<=lig.length-1;i++) {
 				os.write ((lig[i]+"\n").data);
 			}	
@@ -210,8 +237,8 @@ int main (string[] args){
 			
 			if (boutonvisible==false) {
 			//Montre les boutons appliquer et retour
-			mygrid.attach( btnappliquer,0,7);
-			mygrid.attach( btnretour,1,7);
+			mygrid.attach( btnappliquer,0,8);
+			mygrid.attach( btnretour,1,8);
 			mygrid.show_all();
 			string[] cde= new string[3];
 			
@@ -226,7 +253,7 @@ int main (string[] args){
 					Process.spawn_command_line_sync(cde[i]);
 					}
 				} catch (SpawnError e) {
-					print ("Error: %s\n", e.message);
+					stdout.printf ("Error: %s\n", e.message);
 					}
 				});
 				
@@ -238,7 +265,7 @@ int main (string[] args){
 					Process.spawn_command_line_sync(cde[i]);
 					}
 				} catch (SpawnError e) {
-					print ("Error: %s\n", e.message);
+					stdout.printf ("Error: %s\n", e.message);
 					}
 				});
 			boutonvisible=true;
