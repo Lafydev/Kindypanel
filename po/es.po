@@ -1,14 +1,14 @@
-# Spanish translations for com.github.Lafydev.Kindypanel package.
-# Copyright (C) 2019 THE com.github.Lafydev.Kindypanel'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the com.github.Lafydev.Kindypanel package.
+# Spanish translations for com.github.lafydev.kindypanel package.
+# Copyright (C) 2019 THE com.github.lafydev.kindypanel'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the com.github.lafydev.kindypanel package.
 # Automatically generated, 2019.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: com.github.Lafydev.Kindypanel\n"
+"Project-Id-Version: com.github.lafydev.kindypanel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 10:13+0200\n"
-"PO-Revision-Date: 2019-10-18 10:13+0200\n"
+"POT-Creation-Date: 2019-10-23 12:37+0200\n"
+"PO-Revision-Date: 2019-10-23 12:37+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Kindypanel.vala:72
+#: src/Kindypanel.vala:76
 msgid "Bleu"
 msgstr ""
 
-#: src/Kindypanel.vala:75
+#: src/Kindypanel.vala:79
 msgid "Blanc"
 msgstr ""
 
-#: src/Kindypanel.vala:78
+#: src/Kindypanel.vala:82
 msgid "Noir"
 msgstr ""
 
-#: src/Kindypanel.vala:103
+#: src/Kindypanel.vala:107
 msgid "Garder le mot Application"
 msgstr ""
 
-#: src/Kindypanel.vala:107
+#: src/Kindypanel.vala:111
 msgid "Panel Transparent"
 msgstr ""
 
-#: src/Kindypanel.vala:111
+#: src/Kindypanel.vala:115
 msgid "Créer votre thème!"
 msgstr ""
 
-#: src/Kindypanel.vala:115
+#: src/Kindypanel.vala:119
 msgid "Appliquer thème"
 msgstr ""
 
-#: src/Kindypanel.vala:116
+#: src/Kindypanel.vala:120
 msgid "Retour elementary"
 msgstr ""
 
@@ -53,24 +53,21 @@ msgstr ""
 msgid "Thème modifié avec succès!\n"
 msgstr ""
 
-#: data/com.github.Lafydev.Kindypanel.desktop.in:3
-#: data/com.github.Lafydev.Kindypanel.desktop.in:4
-#: data/com.github.Lafydev.Kindypanel.appdata.xml.in:6
+#: data/com.github.lafydev.kindypanel.desktop.in:3
+#: data/com.github.lafydev.kindypanel.desktop.in:4
+#: data/com.github.lafydev.kindypanel.appdata.xml.in:6
 msgid "Kindypanel"
 msgstr ""
 
-#: data/com.github.Lafydev.Kindypanel.desktop.in:5
-msgid "Create a local theme with an elementary icon"
+#: data/com.github.lafydev.kindypanel.desktop.in:5
+#: data/com.github.lafydev.kindypanel.appdata.xml.in:7
+msgid "Créer un thème avec une icone elementary"
 msgstr ""
 
-#: data/com.github.Lafydev.Kindypanel.desktop.in:8
-msgid "application-default-icon"
+#: data/com.github.lafydev.kindypanel.desktop.in:8
+msgid "com.github.lafydev.kindypanel"
 msgstr ""
 
-#: data/com.github.Lafydev.Kindypanel.desktop.in:11
+#: data/com.github.lafydev.kindypanel.desktop.in:11
 msgid "Icon;Elementary;Panel;"
-msgstr ""
-
-#: data/com.github.Lafydev.Kindypanel.appdata.xml.in:7
-msgid "Create a local theme with an icon"
 msgstr ""

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Lafydev -->
+<component type="desktop">
+	<id>com.github.lafydev.kindypanel</id>
+	<metadata_licence>CC0</metadata_licence>
+	<name>Kindypanel</name>
+	<summary>Créer un thème avec une icone elementary</summary>
+	<description>
+		<p>Ajoute une icone au panel.<br/>
+         Possibilité de panel transparent<br/>
+         Enleve le label Application ou non</p>
+	</description>
+</component>
