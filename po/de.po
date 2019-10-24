@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.lafydev.kindypanel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-23 16:35+0200\n"
+"POT-Creation-Date: 2019-10-24 09:39+0200\n"
 "PO-Revision-Date: 2019-10-23 12:37+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -18,55 +18,55 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Kindypanel.vala:76
-msgid "Bleu"
+msgid "Blue"
 msgstr ""
 
 #: src/Kindypanel.vala:79
-msgid "Blanc"
+msgid "White"
 msgstr ""
 
 #: src/Kindypanel.vala:82
-msgid "Noir"
+msgid "Black"
 msgstr ""
 
 #: src/Kindypanel.vala:85
-msgid "Autre PNG (24*24px) ..."
+msgid "Other PNG (24*24px) ..."
 msgstr ""
 
 #: src/Kindypanel.vala:105
-msgid "Ouvrir..."
+msgid "Open..."
 msgstr ""
 
 #: src/Kindypanel.vala:106
-msgid "_Annuler"
+msgid "_Cancel"
 msgstr ""
 
 #: src/Kindypanel.vala:107
-msgid "_Ouvrir"
+msgid "_Open"
 msgstr ""
 
 #: src/Kindypanel.vala:133
-msgid "Garder le mot Application"
+msgid "Keep the label Application"
 msgstr ""
 
 #: src/Kindypanel.vala:137
-msgid "Panel Transparent"
+msgid "Transparent Panel"
 msgstr ""
 
 #: src/Kindypanel.vala:141
-msgid "Créer votre thème!"
+msgid "Create your theme!"
 msgstr ""
 
 #: src/Kindypanel.vala:145
-msgid "Appliquer thème"
+msgid "Apply your theme"
 msgstr ""
 
 #: src/Kindypanel.vala:146
-msgid "Retour elementary"
+msgid "Return to elementary"
 msgstr ""
 
 #: src/Kindypanel.vala:227
-msgid "Thème modifié avec succès!\n"
+msgid "Succeed!!! You can now test your theme\n"
 msgstr ""
 
 #: data/com.github.lafydev.kindypanel.desktop.in:3
@@ -76,8 +76,7 @@ msgid "Kindypanel"
 msgstr ""
 
 #: data/com.github.lafydev.kindypanel.desktop.in:5
-#: data/com.github.lafydev.kindypanel.appdata.xml.in:7
-msgid "Créer un thème avec une icone elementary"
+msgid "Customize your panel with an icon"
 msgstr ""
 
 #: data/com.github.lafydev.kindypanel.desktop.in:8
@@ -86,4 +85,8 @@ msgstr ""
 
 #: data/com.github.lafydev.kindypanel.desktop.in:11
 msgid "Icon;Elementary;Panel;"
+msgstr ""
+
+#: data/com.github.lafydev.kindypanel.appdata.xml.in:7
+msgid "Customize your panel"
 msgstr ""

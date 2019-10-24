@@ -1,73 +1,73 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# French translations for com.github.lafydev.kindypanel package.
+# Copyright (C) 2019 THE com.github.lafydev.kindypanel'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the com.github.lafydev.kindypanel package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Automatically generated, 2019.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: com.github.lafydev.kindypanel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-24 09:39+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2019-10-24 09:35+0200\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/Kindypanel.vala:76
 msgid "Blue"
-msgstr ""
+msgstr "Bleu"
 
 #: src/Kindypanel.vala:79
 msgid "White"
-msgstr ""
+msgstr "Blanc"
 
 #: src/Kindypanel.vala:82
 msgid "Black"
-msgstr ""
+msgstr "Noir"
 
 #: src/Kindypanel.vala:85
 msgid "Other PNG (24*24px) ..."
-msgstr ""
+msgstr "Autre PNG (24*25px)..."
 
 #: src/Kindypanel.vala:105
 msgid "Open..."
-msgstr ""
+msgstr "Ouvrir..."
 
 #: src/Kindypanel.vala:106
 msgid "_Cancel"
-msgstr ""
+msgstr "_Annuler"
 
 #: src/Kindypanel.vala:107
 msgid "_Open"
-msgstr ""
+msgstr "_Ouvrir"
 
 #: src/Kindypanel.vala:133
 msgid "Keep the label Application"
-msgstr ""
+msgstr "Garder le mot Application"
 
 #: src/Kindypanel.vala:137
 msgid "Transparent Panel"
-msgstr ""
+msgstr "Panel Transparent"
 
 #: src/Kindypanel.vala:141
 msgid "Create your theme!"
-msgstr ""
+msgstr "Créez votre thème"
 
 #: src/Kindypanel.vala:145
 msgid "Apply your theme"
-msgstr ""
+msgstr "Appliquer"
 
 #: src/Kindypanel.vala:146
 msgid "Return to elementary"
-msgstr ""
+msgstr "Retour à elementary"
 
 #: src/Kindypanel.vala:227
 msgid "Succeed!!! You can now test your theme\n"
-msgstr ""
+msgstr "Bravo!!! Vous pouvez maintenant tester votre thème\n"
 
 #: data/com.github.lafydev.kindypanel.desktop.in:3
 #: data/com.github.lafydev.kindypanel.desktop.in:4
@@ -77,7 +77,7 @@ msgstr ""
 
 #: data/com.github.lafydev.kindypanel.desktop.in:5
 msgid "Customize your panel with an icon"
-msgstr ""
+msgstr "Customisez votre panel avec une icone"
 
 #: data/com.github.lafydev.kindypanel.desktop.in:8
 msgid "com.github.lafydev.kindypanel"
@@ -89,4 +89,4 @@ msgstr ""
 
 #: data/com.github.lafydev.kindypanel.appdata.xml.in:7
 msgid "Customize your panel"
-msgstr ""
+msgstr "Customisez votre panel"

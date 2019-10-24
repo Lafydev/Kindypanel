@@ -73,16 +73,16 @@ int main (string[] args){
     mygrid.set_column_spacing (10);
 	
 	//Radio buttons
-	var  btn1 = new RadioButton.with_label_from_widget(null,_("Bleu"));
+	var  btn1 = new RadioButton.with_label_from_widget(null,_("Blue"));
 	mygrid.attach(btn1, 0, 0);
 
-	var btn2 = new Gtk.RadioButton.with_label_from_widget(btn1,_("Blanc"));
+	var btn2 = new Gtk.RadioButton.with_label_from_widget(btn1,_("White"));
 	mygrid.attach(btn2, 0, 1);
       
-	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,_("Noir"));
+	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,_("Black"));
 	mygrid.attach(btn3, 0, 2);
 	  
-	var btnopen = new Gtk.Button.with_label(_("Autre PNG (24*24px) ..."));
+	var btnopen = new Gtk.Button.with_label(_("Other PNG (24*24px) ..."));
 	mygrid.attach(btnopen, 0, 3,2,1);
 	 
 	//affiche l'image choisie
@@ -102,11 +102,11 @@ int main (string[] args){
 		ico=ICONDIR+"elementary-noir.png";
 		img.set_from_file( ico);});
 	btnopen.clicked.connect( ()=> {
-		var dialogue=new Gtk.FileChooserDialog( _("Ouvrir..."),window, Gtk.FileChooserAction.OPEN,
-		_("_Annuler"),Gtk.ResponseType.CANCEL,
-		_("_Ouvrir"),Gtk.ResponseType.ACCEPT);
+		var dialogue=new Gtk.FileChooserDialog( _("Open..."),window, Gtk.FileChooserAction.OPEN,
+		_("_Cancel"),Gtk.ResponseType.CANCEL,
+		_("_Open"),Gtk.ResponseType.ACCEPT);
 		Gtk.FileFilter filter =new Gtk.FileFilter();
-		filter.set_name("Icone (*.png)");
+		filter.set_name("Icon (*.png)");
 		filter.add_pattern( "*.[Pp][Nn][Gg]");
 		dialogue.add_filter(filter);
 
@@ -130,20 +130,20 @@ int main (string[] args){
 	mygrid.attach(separator, 0,4,2);
 		
 	//Ajoute une case à cocher pour garder Application
-	var btnApp = new Gtk.CheckButton.with_label(_("Garder le mot Application"));
+	var btnApp = new Gtk.CheckButton.with_label(_("Keep the label Application"));
 	mygrid.attach(btnApp, 0, 5,2);
 	
 	//Ajoute une case à cocher pour panel Transparent 
-	var btnTransparent = new Gtk.CheckButton.with_label(_("Panel Transparent"));
+	var btnTransparent = new Gtk.CheckButton.with_label(_("Transparent Panel"));
 	mygrid.attach(btnTransparent, 0,6,2);
 
 	//Ajoute un bouton de validation
-	var btn = new Gtk.Button.with_label (_("Créer votre thème!"));
+	var btn = new Gtk.Button.with_label (_("Create your theme!"));
 	mygrid.attach( btn,0,7,2);
 	
 	//Deux boutons prévus pour appliquer le theme
-	var btnappliquer = new Gtk.Button.with_label (_("Appliquer thème"));
-	var btnretour = new Gtk.Button.with_label (_("Retour elementary"));
+	var btnappliquer = new Gtk.Button.with_label (_("Apply your theme"));
+	var btnretour = new Gtk.Button.with_label (_("Return to elementary"));
 	
 	bool erreur=false;
 	bool boutonvisible=false;
@@ -224,7 +224,7 @@ int main (string[] args){
 		
 		if (erreur==false) {
 			//message final
-			var msg = _("Thème modifié avec succès!\n");
+			var msg = _("Succeed!!! You can now test your theme\n");
 			
 			var messagedialog = new Gtk.MessageDialog (window,
 								Gtk.DialogFlags.MODAL,
