@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Kindypanel
 GenericName=Kindypanel
-Comment=Créer un thème avec une icone elementary
+Comment=Customize your panel with an icon
 Categories=Utility;
 Exec=com.github.lafydev.kindypanel
 Icon=com.github.lafydev.kindypanel

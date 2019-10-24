@@ -4,10 +4,10 @@
 	<id>com.github.lafydev.kindypanel</id>
 	<metadata_licence>CC0</metadata_licence>
 	<name>Kindypanel</name>
-	<summary>Créer un thème avec une icone elementary</summary>
+	<summary>Customize your panel</summary>
 	<description>
-		<p>Ajoute une icone au panel.<br/>
-         Possibilité de panel transparent<br/>
-         Enleve le label Application ou non</p>
+		<p>Add an icon to your panel.<br/>
+         Let's choose a transparent panel (or not)<br/>
+         Remove the Application's label (or not)</p>
 	</description>
 </component>
