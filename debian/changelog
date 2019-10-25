@@ -1,9 +1,10 @@
-com.github.lafydev.kindypanel (0.1ubuntu3) UNRELEASED; urgency=medium
+com.github.lafydev.kindypanel (0.1ubuntu4) UNRELEASED; urgency=medium
 
-  * New release update debian files *
+  * New release update xml file *
+  * 
   * 
 
- -- lau <laurencef15@gmail.com>  Fri, 25 Oct 2019 09:44:16 +0200
+ -- lau <laurencef15@gmail.com>  Fri, 25 Oct 2019 11:05:38 +0200
 
 com.github.lafydev.kindypanel (0.1ubuntu1) bionic; urgency=medium
 
