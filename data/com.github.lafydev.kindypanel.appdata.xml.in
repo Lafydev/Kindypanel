@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2019 Lafydev -->
 <component type="desktop">
 	<id>com.github.lafydev.kindypanel</id>
-	<metadata_licence>CC0</metadata_licence>
+	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0+</project_license>
 	<name>Kindypanel</name>
 	<summary>Customize your panel</summary>
 	<description>
@@ -10,4 +11,10 @@
          Let's choose a transparent panel (or not)<br/>
          Remove the Application's label (or not)</p>
 	</description>
+	<screenshots>
+​    	<screenshot type="default">
+​      		<caption>Customize your panel</caption>
+​     	 	<image>http://github.com/Lafydev/Kindypanel/blob/master/screenshot_en.png</image>
+​    	</screenshot>
+​  </screenshots>
 </component>
