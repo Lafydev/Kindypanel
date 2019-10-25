@@ -1,7 +1,7 @@
 Source: com.github.lafydev.kindypanel
 Section: x11
 Priority: extra
-Maintainer: Lafydev <Lafydev/Kindypanel>
+Maintainer: Lafydev <<laurencef15@gmail.com>
 Build-Depends: gettext,
                debhelper (>= 10.5.1),
                libgtk-3-dev (>=3.10),
