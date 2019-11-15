@@ -28,7 +28,7 @@ Thanks to Angedestenebres and Wolfwarrior for their crash-tests <br/>
 <h2>Dependencies/Dépendances:</h2>
 (En)These dependencies are needed for building : <br/>
 (Fr)Ces librairies sont nécessaires à la construction : <br/>
-sudo apt-get install gcc - valac - gtk+-3.0 - meson <br/><br/>
+<pre>sudo apt-get install gcc valac gtk+-3.0 meson </pre/>
 
 <h2>Build with meson/Construction:</h2>
 
