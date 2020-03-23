@@ -2,6 +2,11 @@
 
 <p align="center"><img src="screenshot_en.png"/> </p>
 
+<h1>Easy install (user only) / Installation rapide</h1>
+
+(En) Dowload only the .deb file and run it with your installer. 
+(Fr) Télécharger le fichier .deb et lancez l'installation. 
+
 <h1>Description:</h1>
 (En) Create your personalized panel based on elementary's wingpanel : <br/>
 <ul>
@@ -20,10 +25,6 @@
 </ul>
 
 Thanks to Angedestenebres and Wolfwarrior for their crash-tests <br/>
-
-<h1>Easy install (user only) / Installation rapide</h1>
-
-Dowload only the .deb file and run it with your installer. 
 
 <p align="center"><img src="screenshot.png"/> </p>
 
