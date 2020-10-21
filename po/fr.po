@@ -31,7 +31,7 @@ msgstr "Noir"
 
 #: src/Kindypanel.vala:85
 msgid "Other PNG (24*24px) ..."
-msgstr "Autre PNG (24*25px)..."
+msgstr "Autre PNG (24*24px)..."
 
 #: src/Kindypanel.vala:105
 msgid "Open..."

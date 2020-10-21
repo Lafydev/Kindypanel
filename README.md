@@ -2,7 +2,7 @@
 
 <p align="center"><img src="screenshot_en.png"/> </p>
 
-<h1>Easy install (user only) / Installation rapide</h1>
+<h1>Easy install (user) / Installation rapide</h1>
 
 (En) Dowload only the .deb file and run it with your installer. 
 (Fr) Télécharger le fichier .deb et lancez l'installation. 
@@ -28,7 +28,7 @@ Thanks to Angedestenebres and Wolfwarrior for their crash-tests <br/>
 
 <p align="center"><img src="screenshot.png"/> </p>
 
-<h1>Build and install (developper)</h1>
+<h1>Build and install (developer)</h1>
 
 (En) Download the last release (zip) et extract files<br/>
 (Fr) Télécharger la dernière version (zip) puis extraire les fichier<br/>

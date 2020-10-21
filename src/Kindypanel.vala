@@ -16,14 +16,10 @@
 * see http :// www . gnu . org /licences / .
 */
 
-
 using Gtk;
-//Pour compiler après _() 
-//insérer -X -DGETTEXT_PACKAGE="..."  directives de compil
-//const string GETTEXT_PACKAGE = "...";
 
-//Fonction de copie de rép récursive trouvée sur stackoverflow 
-//modifiée pour ajouter les tests d'existence des fichiers et dossiers	
+//Function recursive copy finded on stackoverflow author nemequ ? 
+//modified : add exist tests for files and dirs
 public bool copy_recursive (GLib.File src, GLib.File dest, GLib.FileCopyFlags flags = GLib.FileCopyFlags.NONE, GLib.Cancellable? cancellable = null) throws GLib.Error {
 GLib.FileType src_type = src.query_file_type (GLib.FileQueryInfoFlags.NONE, cancellable);
 
@@ -41,7 +37,7 @@ if ( src_type == GLib.FileType.DIRECTORY ) {
 		GLib.File.new_for_path (GLib.Path.build_filename (src_path, info.get_name ())),
 		GLib.File.new_for_path (GLib.Path.build_filename (dest_path, info.get_name ())),
 		flags, cancellable);
-		} //fin for
+		} //end for
 	} else if ( src_type == GLib.FileType.REGULAR ) {
     if (!dest.query_exists ()) {
 		src.copy (dest, flags, cancellable);}
@@ -50,57 +46,77 @@ if ( src_type == GLib.FileType.DIRECTORY ) {
 	return true;
 }
  
+public void set_cle(string cle, string couleur) {
+	//access gsettings
+	string schema = "org.gnome.desktop.interface"; 
+	
+	//verifie schema existe
+	var settings_schema = SettingsSchemaSource.get_default ().lookup (schema, true);
+    if (settings_schema != null) {
+    if (settings_schema.has_key (cle)) {
+        var settings = new GLib.Settings (schema);
+        settings.set_string(cle,couleur);
+		} 
+	} else critical("no schema");
+}
+
 int main (string[] args){
 	Gtk.init (ref args);
-		
-	//Repertoires (A améliorer)
+	
+	int curline=0;	
+	//Directories (to be modified)
 	var ICONDIR="/usr/share/kindypanel/icons/"; 
-	string home = Environment.get_home_dir(); // car ~ refusé
+	string home = Environment.get_home_dir(); // because ~ not accepted
 	var PathPerso = File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/");
 	var PathTheme= "/usr/share/themes/elementary/gtk-3.0/";
 			
-	//Fenetre de base
+	//Window 
 	var window = new Gtk.Window ();
 	window.title = "Kindypanel";
 	window.set_position (Gtk.WindowPosition.CENTER);
 	window.set_default_size (350, 70);
 	window.destroy.connect (Gtk.main_quit);
-	window.border_width = 10; //marge intérieure
+	window.border_width = 10; //inner margin
 	
 	//Grid 
 	var mygrid = new Gtk.Grid();
-	mygrid.set_row_spacing (10); //espace entre 2 lignes
+	mygrid.set_row_spacing (10); //space between 2 lines
     mygrid.set_column_spacing (10);
 	
 	//Radio buttons
-	var  btn1 = new RadioButton.with_label_from_widget(null,_("Blue"));
-	mygrid.attach(btn1, 0, 0);
-
-	var btn2 = new Gtk.RadioButton.with_label_from_widget(btn1,_("White"));
-	mygrid.attach(btn2, 0, 1);
-      
-	var btn3 = new Gtk.RadioButton.with_label_from_widget(btn1,_("Black"));
-	mygrid.attach(btn3, 0, 2);
-	  
+	string[] name = {"Blue", "White", "Black","Halloween"};
+	RadioButton[] btn=new RadioButton[4];
+	for (int i=1; i<=4; i++) {
+			if (i == 1) {
+				btn[i]=new RadioButton.with_label_from_widget (null,_(name[i-1]));}
+			else {
+				btn[i]=new RadioButton.with_label_from_widget (btn[1],_(name[i-1])); }
+            mygrid.attach(btn[i], 0, curline++);
+        }
+        
 	var btnopen = new Gtk.Button.with_label(_("Other PNG (24*24px) ..."));
-	mygrid.attach(btnopen, 0, 3,2,1);
+	mygrid.attach(btnopen, 0, curline++,2,1);
 	 
-	//affiche l'image choisie
-	var ico=ICONDIR+ "elementary-bleu.png"; //par défaut
+	//view image
+	var ico=ICONDIR+ "elementary-bleu.png"; //défault
 	var img = new Gtk.Image.from_file(ICONDIR+"/elementary-bleu.png");
 
-	mygrid.attach(img, 1, 0,1,3);
+	mygrid.attach(img, 2, 0,1,3); //image at the top right
 		
 	//signaux 
-	btn1.clicked.connect( ()=> { 
+	btn[1].clicked.connect( ()=> {  
 		ico=ICONDIR+"/elementary-bleu.png" ;
 		img.set_from_file(ico);});
-	btn2.clicked.connect( ()=> { 
+	btn[2].clicked.connect( ()=> { 
 		ico=ICONDIR+"elementary-blanc.png";
 		img.set_from_file( ico); });
-	btn3.clicked.connect( ()=> {
+	btn[3].clicked.connect( ()=> {
 		ico=ICONDIR+"elementary-noir.png";
 		img.set_from_file( ico);});
+	btn[4].clicked.connect( ()=> {
+		ico=ICONDIR+"halloween.png";
+		img.set_from_file( ico);});
+			
 	btnopen.clicked.connect( ()=> {
 		var dialogue=new Gtk.FileChooserDialog( _("Open..."),window, Gtk.FileChooserAction.OPEN,
 		_("_Cancel"),Gtk.ResponseType.CANCEL,
@@ -127,48 +143,48 @@ int main (string[] args){
 
 	});		
 	var separator = new Gtk.Separator(Gtk.Orientation.HORIZONTAL);
-	mygrid.attach(separator, 0,4,2);
+	mygrid.attach(separator, 0,curline++,2);
 		
-	//Ajoute une case à cocher pour garder Application
+	//check : keeping the word Application
 	var btnApp = new Gtk.CheckButton.with_label(_("Keep the label Application"));
-	mygrid.attach(btnApp, 0, 5,2);
+	mygrid.attach(btnApp, 0,curline++,2);
 	
-	//Ajoute une case à cocher pour panel Transparent 
+	//check : Transparent panel  
 	var btnTransparent = new Gtk.CheckButton.with_label(_("Transparent Panel"));
-	mygrid.attach(btnTransparent, 0,6,2);
+	mygrid.attach(btnTransparent, 0,curline++,2);
 
-	//Ajoute un bouton de validation
-	var btn = new Gtk.Button.with_label (_("Create your theme!"));
-	mygrid.attach( btn,0,7,2);
+	//Validation 
+	var btncreate = new Gtk.Button.with_label (_("Create your theme!"));
+	mygrid.attach( btncreate,0,curline++,2);
 	
-	//Deux boutons prévus pour appliquer le theme
+	//2 Buttons : Apply your theme or return
 	var btnappliquer = new Gtk.Button.with_label (_("Apply your theme"));
 	var btnretour = new Gtk.Button.with_label (_("Return to elementary"));
 	
 	bool erreur=false;
 	bool boutonvisible=false;
 	
-	btn.clicked.connect( ()=> { 
+	btncreate.clicked.connect( ()=> { 
 		try {
-			//créer un repertoire dans home si pas déjà 
+			//create a directory in home (if not exists) 
 			if (!PathPerso.query_exists ()) {
 				PathPerso.make_directory_with_parents ();}
 				
-			//copier récursivement les répertoire
+			//recursive copy 
 			var DirTheme = File.new_for_path (PathTheme) ;
 			
 			copy_recursive(DirTheme,PathPerso,FileCopyFlags.NONE);
-			//stdout.printf("Copie recursive des répertoires terminée");
+			//stdout.printf("Copy recursive...done");
 	
-			//Copier le fichier apps.css de elementary pour personnaliser
+			//Copy file apps.css from elementary before tweaks
 			var fichstyle=File.new_for_path (PathTheme+ "/apps.css");
 			
 			//var perso =  File.new_for_path (PathPerso+"/apps.css");
 			var perso =  File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/apps.css");
 			
-			//Force la copie  de apps.css vers home perso même si déjà 
+			//Copy apps.css in home (does it exists or not) 
 			fichstyle.copy (perso, FileCopyFlags.OVERWRITE);	
-			//stdout.printf("Copie apps terminée\n");
+			//stdout.printf("Copy apps.css done\n");
 			
 		    string[] lig= new string[1];
 		    
@@ -203,14 +219,16 @@ int main (string[] args){
 				lig+="}";	
 			}
 			
-		    //Ouvrir le fichier et ajouter modifs 
+		    //Open the file and add modify lines 
 			FileOutputStream os = perso.append_to (FileCreateFlags.NONE);
 			//stdout.printf("nb lignes=%d",lig.length);
 			for (int i=0;i<=lig.length-1;i++) {
 				os.write ((lig[i]+"\n").data);
 			}	
+			//fermer le fichier
+			os.close();
 			
-		    //copier l'icone choisi 
+		    //Copy choosen icon
 		    var modeleico=File.new_for_path (ico);
 		    var copie =  File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/elementaryicon.png");
 			modeleico.copy (copie, FileCopyFlags.OVERWRITE );	
@@ -223,7 +241,7 @@ int main (string[] args){
 		
 		
 		if (erreur==false) {
-			//message final
+			//final message
 			var msg = _("Succeed!!! You can now test your theme\n");
 			
 			var messagedialog = new Gtk.MessageDialog (window,
@@ -236,9 +254,9 @@ int main (string[] args){
 			messagedialog.destroy();
 			
 			if (boutonvisible==false) {
-			//Montre les boutons appliquer et retour
-			mygrid.attach( btnappliquer,0,8);
-			mygrid.attach( btnretour,1,8);
+			//Show 2 buttons :apply and return 
+			mygrid.attach( btnappliquer,0,curline);
+			mygrid.attach( btnretour,1,curline++);
 			mygrid.show_all();
 			string[] cde= new string[3];
 			
@@ -269,11 +287,11 @@ int main (string[] args){
 					}
 				});
 			boutonvisible=true;
-			} //fin creation 2 boutons supplémentaires
+			} //End create 2 buttons
 			
-		} //fin erreur générer theme = False
+		} //End  false= no error in generate theme 
 		
-		});//fin click btn
+		});//end btncreate clic
 	
 
 	window.add (mygrid);
