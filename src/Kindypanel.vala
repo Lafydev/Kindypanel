@@ -83,14 +83,17 @@ int main (string[] args){
 	mygrid.set_row_spacing (10); //space between 2 lines
     mygrid.set_column_spacing (10);
 	
-	//Radio buttons
-	string[] name = {"Blue", "White", "Black","Halloween"};
+	//Radio buttons (no more labels, just an icon)
+	string[] name = {"elementary-bleu", "elementary-blanc", "elementary-noir","halloween"};
 	RadioButton[] btn=new RadioButton[4];
 	for (int i=1; i<=4; i++) {
 			if (i == 1) {
-				btn[i]=new RadioButton.with_label_from_widget (null,_(name[i-1]));}
+				btn[i]=new RadioButton.from_widget (null);}
 			else {
-				btn[i]=new RadioButton.with_label_from_widget (btn[1],_(name[i-1])); }
+				btn[i]=new RadioButton.from_widget (btn[1]); }
+			var imgbtn = new Gtk.Image.from_file(ICONDIR+"/"+name[i-1]+".png");
+			btn[i].add(imgbtn);
+			btn[i].tooltip_text=name[i-1];
             mygrid.attach(btn[i], 0, curline++);
         }
         
@@ -98,10 +101,12 @@ int main (string[] args){
 	mygrid.attach(btnopen, 0, curline++,2,1);
 	 
 	//view image
+	var lblimg = new Gtk.Label (_("Your choice:"));
+	mygrid.attach(lblimg, 2, 0,1,3);//label at the top right
 	var ico=ICONDIR+ "elementary-bleu.png"; //défault
 	var img = new Gtk.Image.from_file(ICONDIR+"/elementary-bleu.png");
 
-	mygrid.attach(img, 2, 0,1,3); //image at the top right
+	mygrid.attach(img, 2, 1,1,3); //image at the top right
 		
 	//signaux 
 	btn[1].clicked.connect( ()=> {  
@@ -132,7 +137,23 @@ int main (string[] args){
 			File newicon = File.new_for_path(ico);
 			try {
 				string file_content_type = newicon.query_info ("*", FileQueryInfoFlags.NONE).get_content_type();
-				if (file_content_type =="image/png") { img.set_from_file( ico); }
+				//Verify size and type
+				var file_info = newicon.query_info ("*", FileQueryInfoFlags.NONE);
+				var file_size= file_info.get_size();
+				//size 2,5Ko max
+				if ((file_size <= 2500) && (file_content_type =="image/png")) 
+				 { img.set_from_file( ico); }
+				 else
+				{
+				var messagedialog = new Gtk.MessageDialog (window,
+								Gtk.DialogFlags.MODAL,
+								Gtk.MessageType.INFO,
+								Gtk.ButtonsType.OK,
+								_("Waiting for an image 2.5 Ko Max"));
+
+					messagedialog.run ();
+					messagedialog.destroy();}
+					
 			} catch (Error e) {
 				stdout.printf("Error %s\n",e.message);
 			}
@@ -159,7 +180,7 @@ int main (string[] args){
 	
 	//2 Buttons : Apply your theme or return
 	var btnappliquer = new Gtk.Button.with_label (_("Apply your theme"));
-	var btnretour = new Gtk.Button.with_label (_("Return to elementary"));
+	var btnretour = new Gtk.Button.with_label (_("Prefer elementary's theme"));
 	
 	bool erreur=false;
 	bool boutonvisible=false;

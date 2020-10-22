@@ -15,7 +15,7 @@ dependencies = [
 
 sources = files('src/Kindypanel.vala')
 
-mes_icons = ['elementary-blanc', 'elementary-noir', 'elementary-bleu']
+mes_icons = ['elementary-blanc', 'elementary-noir', 'elementary-bleu', 'halloween']
 
 foreach m : mes_icons
     install_data(

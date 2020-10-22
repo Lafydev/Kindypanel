@@ -1,6 +1,6 @@
 # Kindypanel
 
-<p align="center"><img src="screenshot_en.png"/> </p>
+<p align="center"><img src="screenshot_1.png"/> </p>
 
 <h1>Easy install (user) / Installation rapide</h1>
 
