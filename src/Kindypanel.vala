@@ -46,16 +46,15 @@ if ( src_type == GLib.FileType.DIRECTORY ) {
 	return true;
 }
  
-public void set_cle(string cle, string couleur) {
+public void set_cle(string schema, string cle, string valeur) {
 	//access gsettings
-	string schema = "org.gnome.desktop.interface"; 
 	
 	//verifie schema existe
 	var settings_schema = SettingsSchemaSource.get_default ().lookup (schema, true);
     if (settings_schema != null) {
     if (settings_schema.has_key (cle)) {
         var settings = new GLib.Settings (schema);
-        settings.set_string(cle,couleur);
+        settings.set_string(cle,valeur);
 		} 
 	} else critical("no schema");
 }
@@ -195,7 +194,7 @@ int main (string[] args){
 			var DirTheme = File.new_for_path (PathTheme) ;
 			
 			copy_recursive(DirTheme,PathPerso,FileCopyFlags.NONE);
-			//stdout.printf("Copy recursive...done");
+			//Copy recursive...done
 	
 			//Copy file apps.css from elementary before tweaks
 			var fichstyle=File.new_for_path (PathTheme+ "/apps.css");
@@ -205,7 +204,7 @@ int main (string[] args){
 			
 			//Copy apps.css in home (does it exists or not) 
 			fichstyle.copy (perso, FileCopyFlags.OVERWRITE);	
-			//stdout.printf("Copy apps.css done\n");
+			//Copy apps.css... done
 			
 		    string[] lig= new string[1];
 		    
@@ -240,21 +239,20 @@ int main (string[] args){
 				lig+="}";	
 			}
 			
-		    //Open the file and add modify lines 
+		    //Open the file and add new lines 
 			FileOutputStream os = perso.append_to (FileCreateFlags.NONE);
 			//stdout.printf("nb lignes=%d",lig.length);
 			for (int i=0;i<=lig.length-1;i++) {
 				os.write ((lig[i]+"\n").data);
 			}	
-			//fermer le fichier
+			//close the file
 			os.close();
 			
 		    //Copy choosen icon
 		    var modeleico=File.new_for_path (ico);
 		    var copie =  File.new_for_path (home +"/.themes/kindypanel/gtk-3.0/elementaryicon.png");
 			modeleico.copy (copie, FileCopyFlags.OVERWRITE );	
-				
-	  
+			
 		  } catch (Error e) {
 			stderr.printf ("Error: %s\n", e.message);
 			erreur=true;
@@ -283,8 +281,8 @@ int main (string[] args){
 			
 			btnappliquer.clicked.connect( ()=> { 
 				cde[1]= "gsettings set org.gnome.desktop.interface gtk-theme \"kindypanel\"";
-				//uniquement pour WM
 				cde[2]= "gsettings set org.gnome.desktop.wm.preferences theme \"kindypanel\"";
+				
 				cde[3]= "killall wingpanel";
 			
 				try {

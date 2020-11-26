@@ -1,61 +1,48 @@
 # Kindypanel
 
-<p align="center"><img src="screenshot_1.png"/> </p>
+[Lire en français](https://github.com/Lafydev/Kindypanel/blob/master/LISEZMOI.md) 
 
-<h1>Easy install (user) / Installation rapide</h1>
+# Description
 
-(En) Dowload only the .deb file and run it with your installer. 
-(Fr) Télécharger le fichier .deb et lancez l'installation. 
+Create your personalized panel based on elementary's wingpanel : 
 
-<h1>Description:</h1>
-(En) Create your personalized panel based on elementary's wingpanel : <br/>
-<ul>
-<li>Add an icon at the top left of the screen</li>
-<li>Choose an elementary icon or upload your own image (PNG)</li>
-<li>Choose to remove or keep the Application's label</li> 
-<li>Choose if you want a transparent panel</li>
-</ul>
+- Add an icon at the top left of the screen
+- Choose an elementary icon or upload your own image (PNG)
+- Choose to remove or keep the Application's label
+- Choose if you want a transparent panel
 
-(Fr) Customisez votre panel à partir du thème basé sur le wingpanel d'elementary : <br/>
-<ul>
-<li>Choisissez un logo pour le coin gauche de votre écran</li>
-<li>Choisissez parmi des icones elementary ou chargez votre propre image (PNG)</li>
-<li>Supprimez ou conservez le nom Application</li> 
-<li>Optez si vous le souhaitez pour un panel transparent</li>
-</ul>
+<img title="screenshot" src="screenshot_en.png" alt="screenshot" data-align="center">
 
-Thanks to Angedestenebres and Wolfwarrior for their crash-tests <br/>
+Thanks to Angedestenebres and Wolfwarrior for their crash-tests  
 
-<p align="center"><img src="screenshot.png"/> </p>
+# Easy install (user)
 
-<h1>Build and install (developer)</h1>
+Download only the .deb file and run it with your installer  or 
 
-(En) Download the last release (zip) et extract files<br/>
-(Fr) Télécharger la dernière version (zip) puis extraire les fichier<br/>
+`sudo dpkg -i com.github.lafydev.kindypanel_0.1ubuntu5_amd64.deb`
 
-<h2>Dependencies/Dépendances:</h2>
-(En) These dependencies are needed for building : <br/>
-(Fr) Ces librairies sont nécessaires à la construction : <br/>
-<pre>sudo apt-get install gcc valac gtk+-3.0 meson </pre/>
+<img src="screenshot.png"/>
 
-<h2>Build with meson/Construction:</h2>
+# Build and install (developer)
 
-(En) Open a Terminal in the extracted folder, build your application with meson and install it with ninja:<br/>
-(Fr) Ouvrir le Terminal dans le répertoire d'extraction, construire votre application et l'installer avec les instructions:<br/>
+Download the last release (zip) et extract files
 
-<pre>meson build --prefix=/usr
+## Dependencies
+
+These dependencies are needed for building : 
+
+`sudo apt-get install gcc valac gtk+-3.0 meson`
+
+## Build with meson
+
+Open a Terminal in the extracted folder, build your application with meson and install it with ninja:
+
+`meson build --prefix=/usr
 cd build
 ninja
-sudo ninja install
-</pre>
+sudo ninja install`
 
-<h2>Uninstall (need the extracted files)</h2>
-(En) In the previous folder ( /build) run the command :<br/>
-<code>sudo ninja uninstall</code>
+## Uninstall (need the extracted files)
+In the previous folder ( /build) run the command :
 
-(Fr) Pour une désinstallation ultérieure conserver le répertoire d'extraction complet. <br/>
-Ouvrir le Terminal dans le répertoire précédant ( /build) et lancer la commande<br/>
-
-
-
-
+`sudo ninja uninstall`
