@@ -83,9 +83,9 @@ int main (string[] args){
     mygrid.set_column_spacing (10);
 	
 	//Radio buttons (no more labels, just an icon)
-	string[] name = {"elementary-bleu", "elementary-blanc", "elementary-noir","halloween"};
-	RadioButton[] btn=new RadioButton[4];
-	for (int i=1; i<=4; i++) {
+	string[] name = {"elementary-bleu", "elementary-blanc", "elementary-noir","halloween","flocon"};
+	RadioButton[] btn=new RadioButton[5];
+	for (int i=1; i<=5; i++) {
 			if (i == 1) {
 				btn[i]=new RadioButton.from_widget (null);}
 			else {
@@ -93,19 +93,21 @@ int main (string[] args){
 			var imgbtn = new Gtk.Image.from_file(ICONDIR+"/"+name[i-1]+".png");
 			btn[i].add(imgbtn);
 			btn[i].tooltip_text=name[i-1];
-            mygrid.attach(btn[i], 0, curline++);
+			int nrow = (i -1) / 3 ;
+			if (i==4) {curline = 0;}
+            mygrid.attach(btn[i], nrow, curline++);
         }
-        
-	var btnopen = new Gtk.Button.with_label(_("Other PNG (24*24px) ..."));
-	mygrid.attach(btnopen, 0, curline++,2,1);
-	 
+    curline = 3;  
 	//view image
 	var lblimg = new Gtk.Label (_("Your choice:"));
-	mygrid.attach(lblimg, 2, 0,1,3);//label at the top right
+	mygrid.attach(lblimg, 2, 0,1,curline);//label at the top right
 	var ico=ICONDIR+ "elementary-bleu.png"; //défault
 	var img = new Gtk.Image.from_file(ICONDIR+"/elementary-bleu.png");
 
-	mygrid.attach(img, 2, 1,1,3); //image at the top right
+	mygrid.attach(img, 2, 1,1,curline++); //image at the top right
+	var btnopen = new Gtk.Button.with_label(_("Other PNG (24*24px) ..."));
+	
+	mygrid.attach(btnopen, 0, curline++,2,1);
 		
 	//signaux 
 	btn[1].clicked.connect( ()=> {  
@@ -120,7 +122,10 @@ int main (string[] args){
 	btn[4].clicked.connect( ()=> {
 		ico=ICONDIR+"halloween.png";
 		img.set_from_file( ico);});
-			
+	btn[5].clicked.connect( ()=> {
+		ico=ICONDIR+"flocon.png";
+		img.set_from_file( ico);});
+	
 	btnopen.clicked.connect( ()=> {
 		var dialogue=new Gtk.FileChooserDialog( _("Open..."),window, Gtk.FileChooserAction.OPEN,
 		_("_Cancel"),Gtk.ResponseType.CANCEL,
